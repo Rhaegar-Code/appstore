@@ -1,0 +1,364 @@
+/* Colors */
+$white : #ffffff;
+$black : #222222;
+$white-gray : #f0f4f8;
+$gray : #f2f2f2;
+$orange : #f38a60;
+$sky : #34e5f7;
+$blue : #2b72db;
+$blue-marine : #2c4a98;
+$blue-dark : #14265f;
+$blood : #f61b6d;
+$red : #fd4770;
+$barnie : #dd5cce;
+$green : #1fb283;
+$green-light : #00d6b9;
+
+/* Fonts of Google Font */
+
+$font-main : 'Raleway',sans-serif;
+$font-sec : 'Poppins',sans-serif;
+
+/* Mixins */
+
+@mixin box-sizing($box-model) {
+    border-box: $box-model;
+}
+
+@mixin button($color) {
+    background: $color;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.6rem 1.0rem;
+    margin-top: 1em;
+    color: $white;
+    border-radius: 5px;
+    font-family: $font-main;
+    border: none;
+}
+
+@mixin background-image($image){
+    background-image: url($image);  
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+@mixin gradient($color1, $color2) {
+    background: linear-gradient(to right, $color1 0%, $color2 100%);
+
+}
+
+/* Mixins Responsive */
+
+$phone : 480px;
+$table : 768px;
+$desktop : 1024px;
+
+@mixin phone {
+    @media only screen and (max-width: #{$phone}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media only screen and (max-width: #{$table}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media only screen and (max-width: #{$desktop}) {
+        @content;
+    }
+}
+
+
+/*Globals */
+
+html {
+    @include box-sizing(border-box);
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
+
+.contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.contenido{
+    display: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+        padding: 1.4rem 0;
+    }
+}
+
+.carrito-compras {
+    position: relative;
+    &:hover .contenido{
+        display: block;
+        position: absolute;
+        right: 0;
+        padding: 1.4rem;
+        background: $white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .18);
+        border-radius: 7px;
+        outline: none;
+
+        table {
+            font-family: $font-sec;
+            text-align: center; 
+        }
+    }
+
+    img {
+        max-width: 150px;
+    }
+
+    .boton {
+        @include button($blue);
+    }
+}
+
+.hero {
+    @include background-image('../img/banner.jpg');
+    min-height: 24rem;
+    background-size: cover;
+    color: $white;
+    font-family: $font-main;
+    display: flex;
+    align-items: center;
+    background-color: rgb(20,20,20);
+    background-blend-mode: soft-light;
+
+    .contenido-hero {
+        flex: 1;
+
+        h2 {
+            font-weight: 400;
+            font-size: 2.4rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        form {
+            position: relative;
+            width: 40%;
+
+            @include tablet() {
+                width: 100%;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                height: 3rem;
+                background: $white;
+                position: absolute;   
+                padding: 3px;
+                border-radius: 5px;
+                outline: none;
+                border: none;
+            }
+
+            button[type="submit"] { 
+                position: absolute;          
+                right: 0;
+                top: 0;
+                width: 3rem;
+                height: 3rem;
+                display: block;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                margin: 0px -7px;
+            }
+
+            button.submit-buscador {
+                background: $red;
+                padding: 3px;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+            button.fa-search {
+                color: $white;
+                font-size: 1.4em;
+            }
+
+
+        }
+    }
+}
+
+.barra {
+    padding: 30px;
+    @include gradient($blue, $blue-marine);
+    color: $white;
+    .iconos {
+        display: flex;
+        justify-content: space-around;
+        flex: 1;
+        align-items: center;
+
+        @include tablet() {
+            flex-direction: column;
+            display: block;
+        }
+
+        .icono {
+            background-position: left center !important;
+            background-size: 2.5rem;
+            flex: 1;
+            text-align: center;
+            font-family: $font-sec;
+
+            @include tablet() {
+                background-position: 20% center;  
+                padding: 10px; 
+            }
+
+            &.icono1 {
+                @include background-image('../img/icono1.png')
+            }
+    
+            &.icono2 {
+                @include background-image('../img/icono2.png')
+            }
+    
+            &.icono3 {
+                @include background-image('../img/icono3.png')
+            }
+        }
+    }
+}
+
+.centrado {
+    text-align: center;
+    font-family: $font-main;
+    font-weight: 400;
+    padding: 10px;
+}
+
+.cursos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .curso {
+        margin-top: 2em;
+        flex: 0 1 calc(25% - 1rem);
+        border: 1px solid $gray;
+        border-radius: 7px;
+        box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+
+        .imagen-curso {
+            width: 100%;
+        }
+
+        @include desktop() {
+            flex: 0 1 calc(33% - 1rem);
+        }
+
+        @include tablet() {
+            flex: 0 1 calc(50% - 1rem);
+        }
+
+        @include phone(){
+            flex: 0 1 calc(100%);
+        }
+
+        .info-curso {
+            font-family: $font-sec;
+            padding: 0.8rem 0.9rem;
+
+            h4 {
+                margin: 0;
+            }
+
+            .precio {
+                display: flex;
+                justify-content: space-between;
+
+                .oferta {
+                    text-decoration: line-through;
+                }
+            }
+
+            .boton {
+                @include button($blue);
+            }
+        }
+
+        
+    }
+
+    .curso &:hover {
+        top: 2px;
+    }  
+    
+}
+
+footer {
+    margin-top: 2.4rem;
+    @include gradient($black,$black);
+    padding: 2.4rem;
+
+    .contenedor-footer {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-between;
+        @include tablet(){
+            flex-direction: column;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            flex: 0 1 calc(25%);
+            @include tablet(){
+                
+            }
+            
+
+            a {
+                color: $white;
+                text-decoration: none;
+                font-family: $font-sec;
+                margin-bottom: 0.3em;
+                font-size: 14px;
+
+                @include tablet(){
+                    padding: 0;
+                    margin-bottom: 1em;
+                }
+                
+                i {
+                    margin-top: 1em;
+                    margin-right: 1em;
+                    font-size: 18px;
+                    @include tablet(){
+                        margin-bottom: 1em;
+                    }
+                }
+            }
+        }
+    }
+}
